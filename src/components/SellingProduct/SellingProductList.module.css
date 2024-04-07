@@ -1,0 +1,57 @@
+.wrapper {
+    margin: 20px 40px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.productSalesInfo {
+    margin-left: 30px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    direction: rtl;
+    text-align: right;
+}
+
+.innerInfo {
+    margin-left: 25px;
+}
+
+.innerMostMap {
+    margin-left: 20px;
+}
+
+.table {
+    background-color: white;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    border-top: 10px dotted #8c8686;
+    display: block;
+    margin: 50px auto;
+    color: #fff;
+    background-color: #fff;
+    height: 1px;
+    width: 30%;
+}
+
+.formDiv {
+    display: block;
+    margin: auto;
+    text-align: center;
+    direction: rtl;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.formLabel {
+    margin-right: 20px;
+}
+
+.datePicker {
+    width: 30%;
+    display: block;
+    margin: 20px auto;
+}

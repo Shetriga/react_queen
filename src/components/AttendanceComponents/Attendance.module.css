@@ -1,0 +1,27 @@
+.wrapper {
+    margin: 20px 40px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.heading {
+    text-align: center;
+    font-weight: 600;
+}
+
+.flexParent {
+    display: flex;
+    justify-content: center;
+}
+
+.formDiv {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stack {
+    padding: 0 45%;
+    margin: 20px auto;
+}

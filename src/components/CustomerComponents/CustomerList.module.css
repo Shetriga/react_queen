@@ -1,0 +1,47 @@
+.wrapper {
+    margin: 20px 40px;
+}
+
+.gridParent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    /* justify-content: space-around; */
+}
+
+.gridItem {
+    width: 24%;
+    text-align: center;
+    margin: 10px 5px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* flex-grow: 1; */
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.subGrid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.loading {
+    color: white;
+    text-align: center;
+}
+
+.addCustomer {
+    margin: 15px auto;
+    display: block;
+}
+
+.innerFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

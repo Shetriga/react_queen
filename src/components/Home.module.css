@@ -1,0 +1,32 @@
+.wrapper {
+    margin: 20px 40px;
+}
+
+.flexParent {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flexItem {
+    width: 32%;
+    margin: 20px 5px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    transition: ease-in-out all 200ms;
+}
+
+.flexItem:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+    background-color: #e8e8e8;
+}
+
+.flexItem img {
+    position: relative;
+    width: 150px;
+}

@@ -1,0 +1,9 @@
+.wrapper {
+    margin: 20px 40px;
+}
+
+.datePicker {
+    width: 20%;
+    display: block;
+    margin: 20px auto;
+}

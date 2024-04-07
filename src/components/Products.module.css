@@ -1,0 +1,45 @@
+.wrapper {
+    padding: 20px 40px;
+}
+
+.table {
+    background-color: white;
+    text-align: center;
+}
+
+.chosenForSelling {
+    background-color: lightgreen;
+}
+
+.addProducts {
+    margin: auto;
+    display: block;
+}
+
+.table .pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    font-size: 1.2rem;
+    gap: 5px;
+    column-span: all;
+}
+
+.table .pagination .pageNum {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+}
+
+.table .pagination .pageNum:hover {
+    background-color: #5AB1BB;
+    color: white;
+}
+
+.pagination .active {
+    background-color: #5AB1BB;
+    color: white;
+}
