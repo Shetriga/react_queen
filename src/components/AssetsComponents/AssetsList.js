@@ -2,21 +2,46 @@ import { useEffect, useState } from "react";
 import classes from "./AssetsList.module.css";
 import Table from "react-bootstrap/Table";
 import NavBar from "../Navbar";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 const AssetsList = () => {
   const [assetsArray, setAssetsArray] = useState([]);
   const [currentArray, setCurrentArray] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
+
+  // Pagination data
+  const [pageCount, setPageCount] = useState(0);
+  const [itemsOffset, setItemsOffset] = useState(0);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const endOffset = itemsOffset + itemsPerPage;
+    setCurrentArray(assetsArray.slice(itemsOffset, endOffset));
+    setPageCount(Math.ceil(assetsArray.length / itemsPerPage));
+  }, [itemsOffset, itemsPerPage, assetsArray]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % assetsArray.length;
+    setItemsOffset(newOffset);
+  };
+  // End Pagination data
+
   useEffect(() => {
     getAssets();
-  });
+  }, []);
 
   const getAssets = () => {
     try {
-      fetch("http://roaaptc.com:3000/asset")
+      setIsLoading(true);
+      fetch("http://roaaptc.com:3000/asset/all", {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      })
         .then((response) => {
           if (!response.ok) {
             setIsLoading(false);
@@ -27,7 +52,8 @@ const AssetsList = () => {
         })
         .then((data) => {
           setIsLoading(false);
-          console.log(data.assets);
+          setAssetsArray(data.assets);
+          setCurrentArray(data.assets);
         })
         .catch((e) => {
           setIsLoading(false);
@@ -39,15 +65,27 @@ const AssetsList = () => {
     }
   };
 
+  const newAssetHandler = () => {
+    navigate("/new/asset");
+  };
+
   return (
     <>
       <NavBar />
       {!isLoading && (
-        <Button className={classes.addAssets} variant="contained">
-          Contained
+        <Button
+          onClick={newAssetHandler}
+          className={classes.addAssets}
+          variant="primary"
+        >
+          Add New Asset
         </Button>
       )}
-      {!isLoading && (
+      {isLoading && <h1 className={classes.heading}>Loading...</h1>}
+      {!isLoading && currentArray.length === 0 && (
+        <h1 className={classes.heading}>لا يـوجد ممتلكات</h1>
+      )}
+      {!isLoading && currentArray.length > 0 && (
         <div className={classes.wrapper}>
           {currentArray.length > 0 && (
             <Table striped bordered hover className={classes.table}>
@@ -55,23 +93,43 @@ const AssetsList = () => {
                 <tr>
                   <th>الصنـف</th>
                   <th>الكمية</th>
-                  <th>السعر</th>
+                  <th>سعر الوحدة</th>
+                  <th>السعر الإجمالى</th>
                   <th>تاريخ الشراء</th>
+                  <th>تاريخ آخر تسجيل</th>
                 </tr>
               </thead>
               <tbody>
-                {currentArray.map((p) => {
+                {currentArray.map((a) => {
                   return (
                     <>
-                      <tr key={p._id}>
-                        <td>{p.purchaseName}</td>
-                        <td>{p.purchaseQuantity}</td>
-                        <td>{p.purchaseTotal}</td>
-                        <td>{p.purchaseDate}</td>
+                      <tr key={a._id}>
+                        <td>{a.assetName}</td>
+                        <td>{a.quantity}</td>
+                        <td>{a.unitPrice}</td>
+                        <td>{a.totalPrice}</td>
+                        <td>{a.purchaseDate}</td>
+                        <td>{a.lastUpdateDate}</td>
                       </tr>
                     </>
                   );
                 })}
+                <td colSpan={6}>
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    pageCount={pageCount}
+                    previousLabel="< previous"
+                    renderOnZeroPageCount={null}
+                    containerClassName={classes.pagination}
+                    pageLinkClassName={classes.pageNum}
+                    previousLinkClassName={classes.pageNum}
+                    nextLinkClassName={classes.pageNum}
+                    activeLinkClassName={classes.active}
+                  />
+                </td>
               </tbody>
             </Table>
           )}

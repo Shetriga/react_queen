@@ -20,6 +20,7 @@ import PurchasesList from "./components/PurchasesComponents/PurchasesList";
 import NewPurchase from "./components/PurchasesComponents/NewPurchase";
 import Attendance from "./components/AttendanceComponents/Attendance";
 import AssetsList from "./components/AssetsComponents/AssetsList";
+import NewAsset from "./components/AssetsComponents/NewAsset";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
               <Route path="/new/purchase" element={<NewPurchase />} />
               <Route path="/attendance" element={<Attendance />} />
               <Route path="/assets" element={<AssetsList />} />
+              <Route path="/new/asset" element={<NewAsset />} />
             </Route>
             <Route path="/" element={<LoginForm />} />
           </Routes>
