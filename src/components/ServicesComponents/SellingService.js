@@ -32,7 +32,7 @@ const SellingService = () => {
   const calculateTotal = () => {
     let tmpTotal = 0;
     chosenServicesForSelling.forEach((e) => {
-      tmpTotal += e.unitPrice;
+      tmpTotal += parseInt(e.unitPrice);
     });
 
     setGrandTotal(tmpTotal);
@@ -70,6 +70,16 @@ const SellingService = () => {
       id: customerId,
       phone: customerPhone,
     });
+  };
+
+  const onSellingServiceCahnegd = (index) => (event) => {
+    let tmpArray = [...chosenServicesForSelling];
+    console.log(index);
+    console.log(tmpArray[index].unitPrice);
+    console.log(event.target.value);
+    tmpArray[index].unitPrice = event.target.value;
+    setChosenServicesForSelling(tmpArray);
+    calculateTotal(chosenServicesForSelling);
   };
 
   const onSubmit = (event) => {
@@ -155,7 +165,13 @@ const SellingService = () => {
                     return (
                       <tr key={s._id}>
                         <td>{s.serviceName}</td>
-                        <td>{s.unitPrice}</td>
+                        <td>
+                          <input
+                            value={s.unitPrice}
+                            onChange={onSellingServiceCahnegd(index)}
+                            type="number"
+                          />
+                        </td>
                         <td>
                           <Button
                             onClick={onDeleteService(index)}

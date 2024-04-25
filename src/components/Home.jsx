@@ -87,10 +87,10 @@ const Home = () => {
                         <img src={require('./assets/services.png')} />
                         <h1>المشتريات</h1>
                     </div>
-                    <div onClick={attendanceHandler} className={classes.flexItem}>
+                    {/* <div onClick={attendanceHandler} className={classes.flexItem}>
                         <img src={require('./assets/attendance.png')} />
                         < h1 > تسجيل حضور وإنصراف</h1>
-                    </div>
+                    </div> */}
                     {localStorage.getItem('type') === 'Owner' && <div onClick={assetsHandler} className={classes.flexItem}>
                         <img src={require('./assets/assets.png')} />
                         < h1 > ممتلكات المكان</h1>
